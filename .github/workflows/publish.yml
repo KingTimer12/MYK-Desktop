@@ -49,6 +49,10 @@ jobs:
           skip-version-file: false
           skip-git-pull: false
           pre-release: true
+      
+      - run: |
+          rm -rf node_modules
+          rm -rf package.json
   release:
     name: Release
     needs: changelog
