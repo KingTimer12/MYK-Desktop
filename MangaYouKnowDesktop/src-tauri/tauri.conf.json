@@ -9,6 +9,11 @@
     "beforeDevCommand": "yarn dev",
     "beforeBuildCommand": "yarn generate"
   },
+  "plugins": {
+    "sql": {
+      "preload": ["sqlite:data.db"]
+    }
+  },
   "app": {
     "windows": [
       {

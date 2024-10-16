@@ -31,10 +31,6 @@ import { DATABASE_NAME } from "./constants";
       }
     }
   })
-  onBeforeMount(async () => {
-    const db = await Database.load(`sqlite:${DATABASE_NAME}`);
-    await db.execute(migrationQuery);
-  })
 </script>
 
 
