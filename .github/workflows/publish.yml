@@ -34,7 +34,7 @@ jobs:
       - run: |
           yarn init -y
           yarn add conventional-changelog-conventionalcommits@7.0.2 --dev
-          yarn add conventional-changelog-conventionalcommits@9.0.0 --dev
+          yarn add conventional-recommended-bump@9.0.0 --dev
       
       - name: Generate Changelog
         id: changelog
