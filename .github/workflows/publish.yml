@@ -95,7 +95,7 @@ jobs:
       - name: Install front-end dependencies
         run: |
           cd MangaYouKnowDesktop
-          yarn install --frozen-lockfile
+          yarn install
           cd ..
           
       - name: Update Cargo.toml
