@@ -29,7 +29,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 19
+          node-version: 20
       
       - run: |
           yarn init -y
@@ -68,11 +68,12 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GIT_TOKEN }}
+          
       
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 19
+          node-version: 18
       
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
