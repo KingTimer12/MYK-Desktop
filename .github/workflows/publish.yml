@@ -30,6 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: 'yarn'
       
       - run: |
           yarn init -y
@@ -52,7 +53,7 @@ jobs:
       
       - run: |
           rm -rf node_modules
-          rm -rf package.json
+          rm package.json
   release:
     name: Release
     needs: changelog
@@ -60,11 +61,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - platform: "ubuntu-22.04"
-            args: ""
-          - platform: "windows-latest"
-            args: ""
+        platform: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout
@@ -77,12 +74,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: 'yarn'
+      
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
       
       - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-22.04'
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev \
+          sudo apt update && sudo apt install -y \
+            libwebkit2gtk-4.1-dev \
             build-essential \
             curl \
             wget \
@@ -90,14 +93,14 @@ jobs:
             libxdo-dev \
             libssl-dev \
             libayatana-appindicator3-dev \
-            librsvg2-dev
+            librsvg2-dev \
+            webkit2gtk-driver \
+            xvfb
       
       - name: Install front-end dependencies
-        run: |
-          cd MangaYouKnowDesktop
-          yarn install
-          cd ..
-          
+        run: yarn
+        working-directory: ./MangaYouKnowDesktop
+        
       - name: Update Cargo.toml
         run: bash library u ${{ needs.changelog.outputs.version }}
       
