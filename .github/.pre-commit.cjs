@@ -14,5 +14,5 @@ exports.preCommit = (props) => {
     }
   }
 
-  replaceVersion('./tauri.conf.json', props.version)
+  replaceVersion('./MangaYouKnowDesktop/src-tauri/tauri.conf.json', props.version)
 }
