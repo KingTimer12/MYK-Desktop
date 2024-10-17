@@ -13,7 +13,7 @@ permissions:
 jobs:
   changelog:
     name: Generate Changelog
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     outputs:
       tag: ${{ steps.changelog.outputs.tag }}
       skipped: ${{ steps.changelog.outputs.skipped }}
@@ -60,7 +60,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest, windows-latest]
+        platform: [ubuntu-22.04, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout
@@ -85,7 +85,7 @@ jobs:
           toolchain: stable
       
       - name: Install dependencies (ubuntu only)
-        if: matrix.platform == 'ubuntu-latest'
+        if: matrix.platform == 'ubuntu-22.04'
         run: |
           sudo apt update && sudo apt install -y \
             libwebkit2gtk-4.1-dev \
