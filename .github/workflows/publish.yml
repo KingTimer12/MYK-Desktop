@@ -72,6 +72,8 @@ jobs:
       - name: Checkout (Windows)
         if: matrix.platform == 'windows-latest'
         run: |
+          git init
+          git remote add origin ${{ github.repository }}
           git fetch --all
           git checkout -b sanitized-branch-name origin/release
       
