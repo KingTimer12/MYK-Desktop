@@ -63,6 +63,12 @@ jobs:
         platform: [ubuntu-22.04, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
+      - name: Git config (Windows)
+        if: matrix.platform == 'windows-latest'
+        run: |
+          git config --global core.protectNTFS true
+          git config --global core.protectHFS true
+      
       - name: Checkout
         uses: actions/checkout@v4
           
