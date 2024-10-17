@@ -68,8 +68,15 @@ jobs:
         run: |
           git config --global core.protectNTFS true
           git config --global core.protectHFS true
+          
+      - name: Checkout (Windows)
+        if: matrix.platform == 'windows-latest'
+        run: |
+          git fetch --all
+          git checkout -b sanitized-branch-name origin/release
       
       - name: Checkout
+        if: matrix.platform != 'windows-latest'
         uses: actions/checkout@v4
           
       - name: Install pnpm
