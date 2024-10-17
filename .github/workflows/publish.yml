@@ -98,7 +98,11 @@ jobs:
             libayatana-appindicator3-dev \
             librsvg2-dev \
             webkit2gtk-driver \
-            xvfb
+            xvfb \
+            python3 \
+            make \
+            g++ \
+            build-essential
       
       - name: Install front-end dependencies
         run: pnpm install
