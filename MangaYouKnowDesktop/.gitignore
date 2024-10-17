@@ -18,6 +18,11 @@ logs
 .fleet
 .idea
 
+# Dont lock dependencies
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
 # Local env files
 .env
 .env.*
