@@ -68,6 +68,11 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GIT_TOKEN }}
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.2
       
       - name: Setup node
         uses: actions/setup-node@v4
