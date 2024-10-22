@@ -73,10 +73,7 @@ jobs:
           ref: temp-branch
           token: ${{ secrets.GIT_TOKEN }}
       
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.12.2
+      - uses: oven-sh/setup-bun@v2
       
       - name: Setup node
         uses: actions/setup-node@v4
@@ -95,7 +92,7 @@ jobs:
       - name: Install front-end dependencies
         run: |
           cd MangaYouKnowDesktop
-          pnpm install
+          bun install
         
       - name: Update Cargo.toml
         run: bash library u ${{ needs.changelog.outputs.version }}

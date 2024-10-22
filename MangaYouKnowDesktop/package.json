@@ -15,7 +15,7 @@
     "@tauri-apps/api": "2.0.1",
     "@tauri-apps/plugin-http": "^2.0.0-rc.2",
     "@tauri-apps/plugin-log": "~2.0.0-rc",
-    "@tauri-apps/plugin-sql": "https://github.com/tauri-apps/tauri-plugin-sql#v2",
+    "@tauri-apps/plugin-sql": "^2.0.0",
     "@types/node": "^22.5.1",
     "add": "^2.0.6",
     "axios": "^1.7.7",
