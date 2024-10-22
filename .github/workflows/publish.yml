@@ -48,7 +48,7 @@ jobs:
           version-file: './MangaYouKnowDesktop/src-tauri/tauri.conf.json'
           skip-version-file: false
           skip-git-pull: false
-          pre-release: true
+          pre-release: false
       
       - run: |
           rm -rf node_modules
@@ -105,6 +105,5 @@ jobs:
           releaseName: v${{ needs.changelog.outputs.version }}
           tagName: ${{ needs.changelog.outputs.tag }}
           releaseBody: ${{ needs.changelog.outputs.changelog }}
-          releaseDraft: true
           args: ${{ matrix.args }}
           projectPath: './MangaYouKnowDesktop'
