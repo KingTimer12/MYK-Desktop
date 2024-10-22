@@ -1,9 +1,21 @@
+## [0.1.3](https://github.com/KingTimer12/MYK-Desktop/compare/v0.1.2...v0.1.3) (2024-10-22)
+
+
+### New Features
+
+* test ([6b09b63](https://github.com/KingTimer12/MYK-Desktop/commit/6b09b630b288fdd3036db01898688e56c28dc906))
+
 ## [0.1.2](https://github.com/KingTimer12/MYK-Desktop/compare/v0.1.2-rc.33...v0.1.2) (2024-10-22)
 
 
 ### New Features
 
 * test ([369ec2b](https://github.com/KingTimer12/MYK-Desktop/commit/369ec2bbcfc3dc7a3d97bac800401409a6d8ae70))
+
+
+### Miscellaneous Chores
+
+* **release:** v0.1.2 [skip ci] ([6d7e49f](https://github.com/KingTimer12/MYK-Desktop/commit/6d7e49fc4fd767e5c641c45c88a1e7fa7f9f892f))
 
 ## [0.1.2-rc.33](https://github.com/KingTimer12/MYK-Desktop/compare/v0.1.2-rc.32...v0.1.2-rc.33) (2024-10-22)
 
@@ -40,16 +52,4 @@
 ### Miscellaneous Chores
 
 * **release:** v0.1.2-rc.31 [skip ci] ([26637ec](https://github.com/KingTimer12/MYK-Desktop/commit/26637ec8802ed263602c5598e826babdfeed55e5))
-
-## [0.1.2-rc.30](https://github.com/KingTimer12/MYK-Desktop/compare/v0.1.2-rc.29...v0.1.2-rc.30) (2024-10-22)
-
-
-### New Features
-
-* test ([5fc014a](https://github.com/KingTimer12/MYK-Desktop/commit/5fc014ada82ea5500638beca704d760b55c99552))
-
-
-### Miscellaneous Chores
-
-* **release:** v0.1.2-rc.30 [skip ci] ([155585b](https://github.com/KingTimer12/MYK-Desktop/commit/155585bdc96ed4362e1d696eb8758bbdf83db04e))
 
