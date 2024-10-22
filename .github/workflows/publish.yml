@@ -63,9 +63,6 @@ jobs:
         platform: [ubuntu-22.04, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
-      - name: Create temporary branch
-        run: git checkout -b temp-branch ${{ github.sha }}
-      
       - name: Checkout
         uses: actions/checkout@v4
         with:
