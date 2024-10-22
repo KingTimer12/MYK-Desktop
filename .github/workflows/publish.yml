@@ -90,7 +90,7 @@ jobs:
         working-directory: ./MangaYouKnowDesktop
         
       - name: Update Cargo.toml
-        run: bash library u ${{ needs.changelog.outputs.version }}
+        run: bash myk u ${{ needs.changelog.outputs.version }}
       
       - name: Publish Release
         uses: tauri-apps/tauri-action@v0
