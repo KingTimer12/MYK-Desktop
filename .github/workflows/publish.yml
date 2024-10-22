@@ -97,6 +97,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          releaseName: v${{ needs.changelog.outputs.version }}
           tagName: ${{ needs.changelog.outputs.tag }}
           releaseBody: ${{ needs.changelog.outputs.changelog }}
           releaseDraft: true
