@@ -63,6 +63,17 @@ jobs:
         platform: [ubuntu-22.04, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        if: matrix.platform != 'windows-latest'
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT_TOKEN }}
+          
+      - name: Checkout (windows only)
+        uses: taiki-e/checkout-action@v1
+        if: matrix.platform == 'windows-latest'
+      
       - uses: oven-sh/setup-bun@v2
       
       - name: Setup node
