@@ -5,9 +5,10 @@ export { MangaReaderToDl } from "./mangareaderto";
 export { TaosectDl } from "./taosect";
 export { MangaPillDl } from "./mangapill";
 export { MangaFireDl } from "./mangafire";
+export { MangaFireRustDl } from "./mangafire-rust";
 export { WeebCentralDl } from "./weebcentral";
 export { MangaLivreDl } from "./mangalivre";
 export { MangaSwatDl } from "./mangaswat";
 export { ComickDl } from "./comick";
-export { MangaParkDl } from "./mangapark"
-export { AtsumaruDl } from "./atsumaru"
+export { MangaParkDl } from "./mangapark";
+export { AtsumaruDl } from "./atsumaru";

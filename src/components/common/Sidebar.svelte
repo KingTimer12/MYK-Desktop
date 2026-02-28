@@ -64,6 +64,12 @@
       iconActive: "ion:images",
       icon: "ion:images-outline",
     },
+    {
+      name: "Extensions",
+      path: "/extensions",
+      iconActive: "heroicons:puzzle-piece-solid",
+      icon: "heroicons:puzzle-piece",
+    },
     // {
     //   name: "Search",
     //   path: "/search",
@@ -142,6 +148,7 @@
               page.url.pathname === "/favorites" && "translate-y-14",
               page.url.pathname === "/library" && "translate-y-28",
               page.url.pathname === "/panels" && "translate-y-[10.5rem]",
+              page.url.pathname === "/extensions" && "translate-y-[14rem]",
             )}
             variant="secondary"
           />

@@ -16,6 +16,7 @@ import {
   MangaPillDl,
   TaosectDl,
   MangaFireDl,
+  MangaFireRustDl,
   WeebCentralDl,
   MangaLivreDl,
   MangaSwatDl,
@@ -64,7 +65,7 @@ export class DownloadManager {
       Taosect: new TaosectDl(),
       MangaDex: new MangaDexDl(),
       MangaPill: new MangaPillDl(),
-      MangaFire: new MangaFireDl(),
+      MangaFire: new MangaFireRustDl(),
       MangaReaderTo: new MangaReaderToDl(),
       WeebCentral: new WeebCentralDl(),
       MangaLivre: new MangaLivreDl(),
@@ -167,23 +168,24 @@ export class DownloadManager {
     return await retry(() => sourceDl.getMangaById(id));
   }
 
-  async search(query: string, source: string, prefetchOthers = false): Promise<Favorite[]> {
+  async search(
+    query: string,
+    source: string,
+    prefetchOthers = false,
+  ): Promise<Favorite[]> {
     try {
       const sourceDl = this.getSource(source);
       const results: Favorite[] = await retry(() => sourceDl.search(query));
       if (prefetchOthers) this.prefetchSearch(query, source);
       return results.slice(0, 20);
     } catch (e) {
-      console.log(e)
-      return []
+      console.log(e);
+      return [];
     }
   }
 
-  async prefetchSearch(
-    query: string,
-    sourceToExclude: string,
-  ) {
-    const type = this.getSourceType(sourceToExclude)
+  async prefetchSearch(query: string, sourceToExclude: string) {
+    const type = this.getSourceType(sourceToExclude);
     const sourceNames = this.getSourcesNames(type);
     for (let source of sourceNames) {
       if (source === sourceToExclude) continue;
@@ -195,13 +197,13 @@ export class DownloadManager {
     const sourceDl = this.getImageBasedSource(favorite.source);
     return await retry(
       () => sourceDl.getFavoriteLanguages!(favorite.source_id),
-      "Source not multilanguage"
+      "Source not multilanguage",
     );
   }
 
   private async _getChapters(
     favorite: Favorite,
-    language?: string
+    language?: string,
   ): Promise<Chapter[]> {
     try {
       const sourceDl = this.getImageBasedSource(favorite.source);
@@ -228,8 +230,8 @@ export class DownloadManager {
       const sourceDl = this.getImageBasedSource(chapter.source);
       return await retry(() => sourceDl.getChapterImages(chapter.chapter_id));
     } catch (e) {
-      console.log(e)
-      return []
+      console.log(e);
+      return [];
     }
   }
 
@@ -240,7 +242,7 @@ export class DownloadManager {
 
   async getImageContent(
     url: string,
-    referer: string
+    referer: string,
   ): Promise<ReadableStream<Uint8Array>> {
     const response = await retry(() =>
       fetch(url, {
@@ -248,7 +250,7 @@ export class DownloadManager {
           ...this.headers,
           Referer: referer,
         },
-      })
+      }),
     );
     if (response.status !== 200 || response.body === null) {
       throw new Error(`Failed to get image content ${url} ${response.status}`);
@@ -269,7 +271,7 @@ export class DownloadManager {
     const img =
       "data:image/png;base64," +
       (await retry(() =>
-        invoke("get_base64_image", { url: url, referer: referer })
+        invoke("get_base64_image", { url: url, referer: referer }),
       ));
     if (await this.isValidBase64Image(img)) return img;
     throw Error("Invalid base64 image.");
@@ -277,12 +279,12 @@ export class DownloadManager {
 
   async getBase64Images(images: string[], referer: string): Promise<string[]> {
     return await Promise.all(
-      images.map((image) => retry(() => this.getBase64Image(image, referer)))
+      images.map((image) => retry(() => this.getBase64Image(image, referer))),
     );
   }
 
   async streamToUint8Array(
-    stream: ReadableStream<Uint8Array>
+    stream: ReadableStream<Uint8Array>,
   ): Promise<Uint8Array> {
     const reader = stream.getReader();
     const chunks: Uint8Array[] = [];
@@ -316,7 +318,7 @@ export class DownloadManager {
       baseDir: BaseDirectory.Document,
       recursive: true,
     });
-    const path = await join("favorite-panels", fileName)
+    const path = await join("favorite-panels", fileName);
     await writeFile(path, bytes, {
       baseDir: BaseDirectory.Document,
     });
@@ -335,7 +337,7 @@ export class DownloadManager {
 
   async joinBase64Images(
     base64Image1: string,
-    base64Image2: string
+    base64Image2: string,
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       const img1 = new Image();
@@ -420,14 +422,14 @@ export class DownloadManager {
   async downloadChapter(
     chapter: Chapter,
     favorite: Favorite,
-    store: Store = null!
+    store: Store = null!,
   ): Promise<void> {
     if (!store)
       store = await load(`Mangas/${favorite.folder_name}/chapters.json`);
     const images = await this.getChapterImages(chapter);
     const imagesBase64: string[] = await this.getBase64Images(
       images,
-      this.getBaseUrl(chapter.source)
+      this.getBaseUrl(chapter.source),
     );
     let chapterPath = `Mangas/${favorite.folder_name}/${chapter.number}`;
     if (get(downloadPath) === "Mangas/") {
@@ -452,17 +454,16 @@ export class DownloadManager {
         await writeFile(
           `${chapterPath}/${i.toString().padStart(3, "0")}.png`,
           bytes,
-          { baseDir: BaseDirectory.Download }
+          { baseDir: BaseDirectory.Download },
         );
-      }
-      else {
+      } else {
         await writeFile(
           `${chapterPath}/${i.toString().padStart(3, "0")}.png`,
           bytes,
         );
       }
     });
-    chapter.path = chapterPath
+    chapter.path = chapterPath;
     await store.set(chapter.number.toString(), chapter);
   }
 }
