@@ -81,6 +81,28 @@ the quarantine flag from a terminal:
 xattr -dr com.apple.quarantine "/Applications/MangaYouKnow.app"
 ```
 
+### Missing `liblzma` on macOS
+
+If the app still crashes right after launching with an error like:
+
+```
+dyld: Library not loaded: /opt/homebrew/opt/xz/lib/liblzma.5.dylib
+```
+
+the app depends on the `liblzma` library, which isn't bundled yet. You need
+[Homebrew](https://brew.sh) and the `xz` package installed:
+
+```bash
+# install Homebrew if you don't have it
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# install the required library
+brew install xz
+```
+
+Make sure you also downloaded the right build for your Mac: **aarch64** for
+Apple Silicon (M1/M2/M3/...) or **x86_64** for Intel Macs.
+
 ## About 
 
 ### Stack
