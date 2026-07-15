@@ -58,6 +58,28 @@ Just install it as you should
 yay -S manga-you-know-desktop-bin
 ```
 
+### "App is not authorized" / "damaged" on macOS
+
+The macOS build is **not signed with an Apple Developer certificate** (that
+requires a paid Apple Developer account, which this project doesn't have yet).
+Because of that, Gatekeeper will refuse to open it on first launch, showing
+something like *"MangaYouKnow can't be opened because Apple cannot check it for
+malicious software"* or *"the app is damaged"*.
+
+This is expected — it's not a virus, it's just an unsigned app. To run it:
+
+1. Try to open the app once (double-click). macOS blocks it.
+2. Go to **System Settings → Privacy & Security**.
+3. Scroll to the **Security** section — you'll see a message about
+   *"MangaYouKnow was blocked"*. Click **Open Anyway**.
+4. Confirm with **Open** in the dialog (you may need to enter your password).
+
+You only need to do this once. If the app is reported as *"damaged"*, remove
+the quarantine flag from a terminal:
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/MangaYouKnow.app"
+```
 
 ## About 
 
